@@ -1,0 +1,6 @@
+pandas
+PyYAML
+requests
+plotly
+pymongo
+SQLAlchemy
