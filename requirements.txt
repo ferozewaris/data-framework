@@ -5,3 +5,5 @@ plotly
 pymongo
 SQLAlchemy
 langchain
+langchain_community
+huggingface_hub

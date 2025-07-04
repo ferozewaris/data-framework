@@ -12,6 +12,11 @@ from cleaning import clean_data
 from aggregation import aggregate_data
 from dashboard import generate_charts, save_dashboard
 from utils import read_yaml
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+os.environ['HF_API_TOKEN']=os.getenv("HF_API_TOKEN")
 
 
 def run_pipeline(data_source: str, prompt: str, config_path: str = "config.yaml", output_html: str = "dashboard.html") -> None:
