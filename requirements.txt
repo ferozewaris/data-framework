@@ -4,3 +4,4 @@ requests
 plotly
 pymongo
 SQLAlchemy
+langchain
