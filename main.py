@@ -19,9 +19,15 @@ load_dotenv()
 os.environ['HF_API_TOKEN']=os.getenv("HF_API_TOKEN")
 
 
-def run_pipeline(data_source: str, prompt: str, config_path: str = "config.yaml", output_html: str = "dashboard.html") -> None:
+def run_pipeline(
+    data_source: str,
+    prompt: str,
+    config_path: str = "config.yaml",
+    output_html: str = "dashboard.html",
+    provider: str = "huggingface",
+) -> None:
     """Run the full pipeline from data ingestion to dashboard creation."""
-    config = generate_config(data_source, prompt, output_path=config_path)
+    config = generate_config(data_source, prompt, output_path=config_path, provider=provider)
     ingest_cfg = {"type": "csv", "path": data_source}
     df = ingest(ingest_cfg)
     df_clean = clean_data(df, config)
@@ -34,8 +40,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Gen-AI data pipeline")
     parser.add_argument("data_source", help="Path to data file or connection string")
     parser.add_argument("prompt", help="Dashboard intent in natural language")
+    parser.add_argument(
+        "--provider",
+        default="huggingface",
+        choices=["huggingface", "openai", "meta", "gemini"],
+        help="LLM provider to use",
+    )
     args = parser.parse_args()
-    run_pipeline(args.data_source, args.prompt)
+    run_pipeline(args.data_source, args.prompt, provider=args.provider)
 
 
 if __name__ == "__main__":
