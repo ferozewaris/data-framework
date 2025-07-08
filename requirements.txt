@@ -7,3 +7,6 @@ SQLAlchemy
 langchain
 langchain_community
 huggingface_hub
+openai
+langchain_google_genai
+replicate
